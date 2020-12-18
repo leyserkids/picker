@@ -5,12 +5,15 @@ export type ItemValue  = number | string
 
 export interface PickerItemProps {
 	label?: string;
-	value: ItemValue;
+   value: ItemValue;
+   fontSize?: number;
 	color?: string;
 	testID?: string;
 }
 
 export interface PickerProps extends ViewProps {
+   color?: string;
+   fontSize?: number;
 	style?: StyleProp<TextStyle>;
 	/**
    * Value matching value of one of the items. Can be a string or an integer.
