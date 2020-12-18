@@ -41,6 +41,7 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
     if (adapter == null) {
       adapter = new ReactPickerAdapter(view.getContext(), items);
       adapter.setPrimaryTextColor(view.getPrimaryColor());
+      adapter.setFontSize(view.getFontSize());
       view.setAdapter(adapter);
     } else {
       adapter.setItems(items);
@@ -55,6 +56,15 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
       adapter.setPrimaryTextColor(color);
     }
   }
+
+  @ReactProp(name = ViewProps.FONT_SIZE, defaultFloat = 14)
+  public void setFontSize(ReactPicker view, float fontSize) {
+    view.setFontSize(fontSize);
+    ReactPickerAdapter adapter = (ReactPickerAdapter) view.getAdapter();
+    if (adapter != null) {
+      adapter.setFontSize(fontSize);
+    }
+  };
 
   @ReactProp(name = "prompt")
   public void setPrompt(ReactPicker view, @Nullable String prompt) {
@@ -89,6 +99,7 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
 
   private static class ReactPickerAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
+    private float mFontSize;
     private @Nullable Integer mPrimaryTextColor;
     private @Nullable ReadableArray mItems;
 
@@ -144,10 +155,27 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
 
       TextView textView = (TextView) convertView;
       textView.setText(item.getString("label"));
-      if (!isDropdown && mPrimaryTextColor != null) {
+
+      textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+
+      textView.setGravity(77);
+
+      if (mPrimaryTextColor != null) {
         textView.setTextColor(mPrimaryTextColor);
-      } else if (item.hasKey("color") && !item.isNull("color")) {
+      }
+
+      if (item.hasKey("color") && !item.isNull("color")) {
         textView.setTextColor(item.getInt("color"));
+      }
+
+      if (mFontSize > 0) {
+        textView.setTextSize(mFontSize);
+      } else  {
+        textView.setTextSize(14);
+      }
+
+      if(item.hasKey("fontSize") && !item.isNull("fontSize")) {
+        textView.setTextSize(item.getInt("fontSize"));
       }
 
       return convertView;
@@ -157,6 +185,12 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
       mPrimaryTextColor = primaryTextColor;
       notifyDataSetChanged();
     }
+
+    public void setFontSize(float fontsize) {
+      mFontSize = fontsize;
+      notifyDataSetChanged();
+    }
+
   }
 
   private static class PickerEventEmitter implements ReactPicker.OnSelectListener {

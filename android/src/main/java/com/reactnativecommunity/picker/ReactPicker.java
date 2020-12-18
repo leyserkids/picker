@@ -22,6 +22,7 @@ public class ReactPicker extends AppCompatSpinner {
 
   private int mMode = Spinner.MODE_DIALOG;
   private @Nullable Integer mPrimaryColor;
+  private float mFontSize;
   private @Nullable OnSelectListener mOnSelectListener;
   private @Nullable Integer mStagedSelection;
 
@@ -146,6 +147,12 @@ public class ReactPicker extends AppCompatSpinner {
 
   public void setPrimaryColor(@Nullable Integer primaryColor) {
     mPrimaryColor = primaryColor;
+  }
+
+  public float getFontSize() {return  mFontSize;}
+
+  public void setFontSize(float fontSize) {
+    mFontSize = fontSize;
   }
 
   @VisibleForTesting

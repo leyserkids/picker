@@ -43,6 +43,12 @@ type PickerItemProps = $ReadOnly<{|
    */
   color?: ColorValue,
 
+    /**
+   * fontSize of this item's text.
+   * @platform android
+   */
+  fontSize?: number,
+
   /**
    * Used to locate the item in end-to-end tests.
    */
@@ -103,6 +109,18 @@ type PickerProps = $ReadOnly<{|
    * @platform android
    */
   prompt?: ?string,
+
+    /**
+   * Color of this item's text.
+   * @platform android
+   */
+  color?: ColorValue,
+
+    /**
+   * fontSize of this item's text.
+   * @platform android
+   */
+  fontSize?: number,
 
   /**
    * Used to locate this view in end-to-end tests.

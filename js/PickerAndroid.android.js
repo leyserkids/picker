@@ -47,6 +47,7 @@ type Item = $ReadOnly<{|
   label: string,
   value: ?(number | string),
   color?: ?number,
+  fontSize?: ?number,
 |}>;
 
 type PickerAndroidState = {|
@@ -76,6 +77,7 @@ class PickerAndroid extends React.Component<
       const childProps = {
         value: child.props.value,
         label: child.props.label,
+        fontSize: child.props.fontSize,
       };
       if (child.props.color) {
         /* $FlowFixMe(>=0.78.0 site=react_native_android_fb) This issue was
@@ -101,6 +103,8 @@ class PickerAndroid extends React.Component<
       mode: this.props.mode,
       onSelect: this._onChange,
       prompt: this.props.prompt,
+      color: this.props.color,
+      fontSize: this.props.fontSize,
       selected: this.state.selectedIndex,
       testID: this.props.testID,
       style: [styles.pickerAndroid, this.props.style],
