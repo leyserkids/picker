@@ -148,7 +148,7 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
 
       if (convertView == null) {
         int layoutResId = isDropdown
-            ? android.R.layout.simple_spinner_dropdown_item
+            ? android.R.layout.select_dialog_singlechoice
             : android.R.layout.simple_spinner_item;
         convertView = mInflater.inflate(layoutResId, parent, false);
       }
@@ -156,9 +156,9 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
       TextView textView = (TextView) convertView;
       textView.setText(item.getString("label"));
 
-      textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+      // textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
-      textView.setGravity(77);
+      // textView.setGravity(77);
 
       if (mPrimaryTextColor != null) {
         textView.setTextColor(mPrimaryTextColor);
